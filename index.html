@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax project</title>
+    <link href="css/milligram.css" rel="stylesheet">
+
+</head>
+<body>
+
+
+<div id="loader" class="loading d-none"></div>
+
+
+<div class="container">
+    <div class="row">
+        <a href="create.html" class="button fw-bolder button-outline float-left">Create New</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <table>
+             <thead>
+               <tr>
+                  <th>Product Name</th>
+                   <th>Product Code</th>
+                   <th>Unit Price</th>
+                   <th>Qty</th>
+                   <th>Total Price</th>
+                   <th>Update</th>
+               </tr>
+             </thead>
+            <tbody id="ItemList">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="js/axios.min.js"></script>
+
+
+<script>
+
+    async function getList(){
+
+        document.getElementById('loader').classList.remove('d-none')
+
+        let URL = `http://164.68.107.70:6060/api/v1/CreateProduct/`
+        let res=await axios.get(URL);
+
+        document.getElementById('loader').classList.add('d-none')
+
+
+        if(res.status===200){
+            let list= res.data['data'];
+
+            list.forEach((item)=>{
+
+                document.getElementById('itemList').innerHTML+=(`<tr>
+                            <td></td>
+                  </tr>`)
+            })
+        }
+        else {
+            alert("something with wrong")
+        }
+
+    }
+
+</script>
+
+
+</body>
+</html>
