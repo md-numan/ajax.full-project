@@ -28,6 +28,7 @@
                    <th>Unit Price</th>
                    <th>Qty</th>
                    <th>Total Price</th>
+                   <th>Delete</th>
                    <th>Update</th>
                </tr>
              </thead>
@@ -46,7 +47,7 @@
 
         document.getElementById('loader').classList.remove('d-none')
 
-        let URL = `http://164.68.107.70:6060/api/v1/CreateProduct/`
+        let URL = `http://164.68.107.70:6060/api/v1/ReadProduct`
         let res=await axios.get(URL);
 
         document.getElementById('loader').classList.add('d-none')
@@ -55,10 +56,17 @@
         if(res.status===200){
             let list= res.data['data'];
 
+
             list.forEach((item)=>{
 
-                document.getElementById('itemList').innerHTML+=(`<tr>
-                            <td></td>
+                document.getElementById('ItemList').innerHTML+=(`<tr>
+                            <td>${item['productName']}</td>
+                            <td>${item['productCode']}</td>
+                            <td>${item['UnitPrice']}</td>
+                            <td>${item['Qty']}</td>
+                            <td>${item['TotalPrice']}</td>
+                            <td><button onclick="deleteItem('${item['_id']}')">Delete</button></td>
+                            <td><button onclick="updateItem('${item['_id']}')">Update</button></td>
                   </tr>`)
             })
         }
@@ -67,6 +75,25 @@
         }
 
     }
+
+async function deleteItem(Id){
+        let URL = 'http://164.68.107.70:6060/api/v1/CreateProduct/${id}'
+    let res = await axios.get(URL);
+    if (res.status===200){
+        document.getElementById('itemList').innerHTML=""
+        await getList();
+    }
+}
+
+
+
+function  updateItem(id){
+        window.location=`update.html`
+}
+
+
+getList();
+
 
 </script>
 
