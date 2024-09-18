@@ -55,20 +55,17 @@
 
         if(res.status===200){
             let list= res.data['data'];
-
-
             list.forEach((item)=>{
-
                 document.getElementById('ItemList').innerHTML+=(`<tr>
-                            <td>${item['productName']}</td>
-                            <td>${item['productCode']}</td>
+                            <td>${item['ProductName']}</td>
+                            <td>${item['ProductCode']}</td>
                             <td>${item['UnitPrice']}</td>
                             <td>${item['Qty']}</td>
                             <td>${item['TotalPrice']}</td>
                             <td><button onclick="deleteItem('${item['_id']}')">Delete</button></td>
                             <td><button onclick="updateItem('${item['_id']}')">Update</button></td>
                   </tr>`)
-            })
+            });
         }
         else {
             alert("something with wrong")
@@ -76,8 +73,8 @@
 
     }
 
-async function deleteItem(Id){
-        let URL = 'http://164.68.107.70:6060/api/v1/CreateProduct/${id}'
+async function deleteItem(id){
+        let URL =  `http://164.68.107.70:6060/api/v1/DeleteProduct/${id}`
     let res = await axios.get(URL);
     if (res.status===200){
         document.getElementById('itemList').innerHTML=""
@@ -87,13 +84,13 @@ async function deleteItem(Id){
 
 
 
+
 function  updateItem(id){
-        window.location=`update.html`
+        window.location=`update.html?id=${id}`
 }
 
 
 getList();
-
 
 </script>
 
