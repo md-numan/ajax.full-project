@@ -48,7 +48,7 @@
         document.getElementById('loader').classList.remove('d-none')
 
         let URL = `http://164.68.107.70:6060/api/v1/ReadProduct`
-        let res=await axios.get(URL);
+        let res= await axios.get(URL);
 
         document.getElementById('loader').classList.add('d-none')
 
@@ -77,7 +77,7 @@ async function deleteItem(id){
         let URL =  `http://164.68.107.70:6060/api/v1/DeleteProduct/${id}`
     let res = await axios.get(URL);
     if (res.status===200){
-        document.getElementById('itemList').innerHTML=""
+        document.getElementById('ItemList').innerHTML=" "
         await getList();
     }
 }
